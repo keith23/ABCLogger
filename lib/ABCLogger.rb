@@ -54,7 +54,7 @@ class ABCLogger
 
   # open the logfile
   # @param [string] filename
-  def openlog(filename = 'logger')
+  def openlog(filename = 'ABCLogger')
     @outfile = File.open(filename  + '.log', 'a+')
     @_is_file_open = true
   end

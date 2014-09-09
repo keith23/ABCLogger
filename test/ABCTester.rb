@@ -1,6 +1,8 @@
 # Test program for ABCLogger a ruby logfile class
 require 'ABCLogger'
 
+puts 'Version: ' + ABCLogger::VERSION
+
 
 # Test for screen logging, one liners
 ABCLogger.instance.message('Error Catcher', 'Testing again')
