@@ -6,10 +6,10 @@ require 'ABCLogger/version'
 Gem::Specification.new do |spec|
   spec.name          = "ABCLogger"
   spec.version       = ABCLogger::VERSION
-  spec.authors       = ["Keith Kowalski"]
+  spec.authors       = ["Keith"]
   spec.email         = ["keithk23@gmail.com"]
-  spec.summary       = %q{Ruby class for logging.}
-  spec.description   = %q{Ruby class for logging to stdout or to a file.}
+  spec.summary       = %q{Ruby class for logging to a logfile.}
+  spec.description   = %q{Ruby class for logging to stdout, stderr, or a file.}
   spec.homepage      = ''
   spec.license       = "MIT"
 
