@@ -1,6 +1,6 @@
 # Test program for ABCLogger a ruby logfile class
 require 'ABCLogger'
-#require 'ABCLogger/ABCSharedLogger'
+require 'ABCSharedLogger'
 
 logger = ABCLogger.new
 logger.set_level(:debug)
@@ -30,7 +30,7 @@ logger.log_formatted(:warning, 'init','Value was: %d', val)
 
 logger.log(:error, nil, 'Testing 123....')
 
-#ABCSharedLogger.instance.log(:error, nil, 'Testing singleton')
+ABCSharedLogger.instance.log(:error, nil, 'Testing singleton')
 
 #logger.log(nil, '2 args ........Test message' )
 logger.log(:fatal, 'Other 2 args ........Test message' )
