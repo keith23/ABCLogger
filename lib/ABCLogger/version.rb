@@ -3,7 +3,7 @@ class ABCLogger
 
   VERSION = "0.0.1"
 
-  LEVELS = {:debug => 0, :info => 1, :warn => 2,
+  LEVELS = {:debug => 0, :info => 1, :warning => 2,
              :error => 3, :fatal => 4, :unknown => 5}
 
   #LEVELS = [:debug, :info, :warning, :error, :fatal, :unknown]

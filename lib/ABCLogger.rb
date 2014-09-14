@@ -1,4 +1,5 @@
 require 'ABCLogger/version'
+require 'ABCLogger/exceptions'
 #require 'singleton'
 require 'date'
 
@@ -53,15 +54,23 @@ class ABCLogger
   # open the logfile
   # @param [string] filename
   def open(filename = 'ABCLogger.log')
-    @outfile = File.open(filename, 'a+')
-    @outfile_open = true
+    begin
+      @outfile = File.open(filename, 'a+')
+      @outfile_open = true
+    rescue SystemCallError => exc
+      handle_exception(exc)
+    end
   end
 
   # close the logfile
   def close
-    @outfile.close
-    @outfile = STDOUT
-    @outfile_open = false
+    begin
+      @outfile.close
+      @outfile = STDOUT
+      @outfile_open = false
+    rescue SystemCallError => exc
+      handle_exception(exc)
+    end
   end
 
   # Log message with level
@@ -188,6 +197,11 @@ class ABCLogger
     @lnames[lvl]
   end
 
+  # log exception and raise
+  def handle_exception(exc)
+    self.log_exception(:fatal, '***ABCLogger***', exc)
+    raise ABCLoggerException.new(exc.message)
+  end
 
   #def test_func(sym)
   #  lvl = @levels[sym]

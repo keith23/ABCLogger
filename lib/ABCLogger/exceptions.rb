@@ -1,6 +1,6 @@
 # ABCLogger Exceptions
 
-# Exception for log file error
+# ABCLoggerException for log file errors
 class ABCLoggerException < Exception
 
 end
