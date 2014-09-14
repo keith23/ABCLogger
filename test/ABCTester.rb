@@ -37,3 +37,11 @@ logger.log(:fatal, 'Other 2 args ........Test message' )
 logger.log(:info, 'another message 2 args')
 logger.log('Msg only ARGS Test message' )
 
+logger.set_output(STDERR)
+logger.log('Testing to STDERR')
+logger.log(:info, 'Testing to STDERR')
+
+logger.set_output(STDOUT)
+logger.log('Testing to STDOUT')
+logger.log(:warning, 'Testing to STDOUT')
+

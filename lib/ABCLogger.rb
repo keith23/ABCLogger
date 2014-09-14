@@ -167,7 +167,7 @@ class ABCLogger
 
     if @enabled
       if @levels[@level] <= lvl_int # @levels[level]
-        output.puts "#{date_str}|#{level_name(level)}|#{loc}|#{msg}"
+        output.puts "#{date_str}|#{$0}|#{level_name(level)}|#{loc}|#{msg}"
       end
     end
   end
