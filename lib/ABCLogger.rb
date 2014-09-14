@@ -1,12 +1,9 @@
-require "ABCLogger/version"
+require 'ABCLogger/version'
 #require 'singleton'
 require 'date'
 
-#module ABCLogger
-  # Your code goes here...
-#end
 
-# GunnyLog logs messages to stdout
+# ABCLogger logs messages to stdout, stderr, or a file
 class ABCLogger
 
   #include Singleton
@@ -34,19 +31,19 @@ class ABCLogger
 
   # Set logging level
   # @param [int] level
-  def set_level level
+  def set_level(level)
     @level = level
   end
 
   # Turn logging on and off
   # @param [boolean] flag
-  def set_enabled flag
+  def set_enabled(flag)
     @enabled = flag
   end
 
   # Set log message location
   # @param [string] name
-  def set_location name
+  def set_location(name)
     @location = name
   end
 
@@ -68,41 +65,51 @@ class ABCLogger
   # @param level [string] logging level
   # @param loc   [string] location string
   # @param msg   [string] message string
-  def log(level = debug, loc = nil, msg)
+  def log(level = :debug, loc = nil, msg)
     write_msg(@outfile, level, loc, msg)
   end
 
   # Log formatted message - single arg or array of args
-  # @param [string] loc - message location
-  # @param [string] msg - message format string
-  # @param [arg or array of args]
+  # @param level [int] log level
+  # @param loc [string] message location
+  # @param msg [string] message format string
+  # @param args [arg or array of args]
   def log_formatted(level, loc, msg, args)
     formatted = sprintf(msg, *args)
     log(level, loc, formatted)
   end
 
-  # write formatted message - variable number of args
-  # @param [string] loc - message location
-  # @param [string] msg - message format string
-  # @param [variable number of args]
+  # Log formatted message - variable number of args
+  # @param level [int] log level
+  # @param loc [string] message location
+  # @param msg [string] message format string
+  # @param args [variable number of args]
   def log_formatted_vars(level, loc, msg, *args)
     formatted = sprintf(msg, *args)
     log(level, loc, formatted)
   end
 
-  private
+  # Log exception to logfile
+  # @param level [int] log level
+  # @param loc [string] message location
+  # @param exc [exception] exception to log
+  def log_exception(level, loc, exc)
+    log(level, loc, exc.message)
+  end
 
   # Initialize ABCLogger
   def initialize
-    @levels = {:debug => 0, :info => 1, :warn => 2,
+    @levels = {:debug => 0, :info => 1, :warning => 2,
                :error => 3, :fatal => 4, :unknown => 5}
-    @lnames = [ 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'FATAL', 'UNKNOWN']
+    @lnames = %w(DEBUG INFO WARNING ERROR FATAL UNKNOWN)
     @level = :debug
     @enabled = true
-    @location = 'MainMethod'
+    @location = 'Main'
     @outfile_open = false
     @outfile = STDOUT
   end
+
+  private
 
   def write_msg(output, level = :debug, loc, msg)
     if loc == nil
@@ -119,14 +126,33 @@ class ABCLogger
   end
 
   def level_name(sym)
+    #puts "level_name(#{sym})"
+    case sym
+      when Integer
+        #puts 'INTEGER'
+        return @lnames[sym]
+      when Symbol
+        #puts 'SYMBOL'
+      when String
+        #puts 'STRING'
+      else
+        #puts 'NOT SURE'
+    end
+    #if sym == nil
+    #  sym = 0
+    #end
     lvl = @levels[sym]
-    return @lnames[lvl]
+    @lnames[lvl]
+  end
+
 
   #def test_func(sym)
   #  lvl = @levels[sym]
   #  puts "#{lvl}|#{@lnames[lvl]}"
   #end
 
-  end
-
 end
+
+#module ABCLogger
+# Your code goes here...
+#end
