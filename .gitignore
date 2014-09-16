@@ -16,4 +16,4 @@ mkmf.log
 .idea
 .idea/*
 *.gem
-test/zABCTester.rb
+test/ABCTesterZZZ.rb

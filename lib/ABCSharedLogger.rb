@@ -1,18 +1,34 @@
+# ABCSharedLogger
 require 'ABCLogger'
 require 'singleton'
 
+# Singleton version of ABCLogger
 class ABCSharedLogger < ABCLogger
 
   include Singleton
 
-  #def self.instance
-  #  @@instance ||= new
-  #end
+  # Instance method for ABCSharedLogger
+  # @return [ABCSharedLogger] instance
+  def self.instance
 
-  #private
+    if DEBUG_LOG
+      puts '***ABCSharedLogger::instance'
+    end
 
-  #def initialize
-  #  super.initialize
-  #end
+    @@instance ||= new
+
+  end
+
+  private
+
+  def initialize
+
+    if DEBUG_LOG
+      puts '***ABCSharedLogger::initialize'
+    end
+
+    super
+
+  end
 
 end

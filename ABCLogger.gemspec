@@ -5,7 +5,7 @@ require 'ABCLogger/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ABCLogger"
-  spec.version       = ABCLogger::VERSION
+  spec.version       = ABCVersion::VERSION
   spec.authors       = ["Keith"]
   spec.email         = ["keithk23@gmail.com"]
   spec.summary       = %q{Ruby class for logging to a logfile.}
