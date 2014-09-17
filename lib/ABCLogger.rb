@@ -81,9 +81,9 @@ class ABCLogger
   end
 
   # open the logfile
-  # @param [string] path
-  # @param [string] prefix
-  # @param [string] ext
+  # @param [string] path nil for no path
+  # @param [string] prefix file name prefix
+  # @param [string] ext file name extension
   def open_with_date(path = nil, prefix = 'ABCLogger', ext = 'log')
     begin
       d = DateTime.now
@@ -170,7 +170,7 @@ class ABCLogger
   # @param level [int] log level
   # @param loc [string] message location
   # @param msg [string] message format string
-  # @param args [variable number of args]
+  # @param args [arg1 arg2 ... argN] variable number of args
   def log_formatted_vars(level, loc, msg, *args)
     formatted = sprintf(msg, *args)
     log(level, loc, formatted)
